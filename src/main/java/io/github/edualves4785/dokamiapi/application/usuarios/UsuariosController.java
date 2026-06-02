@@ -1,14 +1,15 @@
 package io.github.edualves4785.dokamiapi.application.usuarios;
 
 import io.github.edualves4785.dokamiapi.domain.entities.Usuario;
+import io.github.edualves4785.dokamiapi.domain.entities.exception.TuplaDuplicadaExcpetion;
 import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/v1/usuarios")
@@ -17,21 +18,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuariosController {
 
     private final UsuarioService usuarioService;
+    private final UsuarioMapper usuarioMapper;
 
     @PostMapping
-    public ResponseEntity cadastrar(
-            @RequestParam("nome") String nome,
-            @RequestParam("email") String email,
-            @RequestParam("senha") String senha
-    ){
-        log.info("Usuário recebido: nome: {}, email: {}",nome, email);
-        Usuario u=Usuario
-                .builder()
-                .nome(nome)
-                .email(email)
-                .senha(senha)
-                .build();
-        usuarioService.cadastrar(u);
-        return ResponseEntity.ok().build();
+    public ResponseEntity cadastrar(@RequestBody UsuarioDTO dto){
+        try {
+            Usuario usuario= usuarioMapper.mapToUsuario(dto);
+            usuarioService.cadastrar(usuario);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }catch (TuplaDuplicadaExcpetion e){
+            Map<String, String> jsonResultado= Map.of("error",e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(jsonResultado);
+        }
+    }
+
+    @PostMapping("/auth")
+    public ResponseEntity autenticar(@RequestBody CredenciaisDTO credenciais){
+        var token=usuarioService.autenticar(credenciais.getEmail(), credenciais.getSenha());
+        if (token==null){
+         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        return ResponseEntity.ok(token);
     }
 }
