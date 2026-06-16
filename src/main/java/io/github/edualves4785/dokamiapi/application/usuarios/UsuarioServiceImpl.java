@@ -7,9 +7,13 @@ import io.github.edualves4785.dokamiapi.domain.entities.exception.TuplaDuplicada
 import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
 import io.github.edualves4785.dokamiapi.infra.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.security.Security;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +26,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public Usuario getByEmail(String email) {
         return repository.findByEmail(email);
+    }
+
+    @Override
+    public Usuario getUsuarioLogado() {
+        Authentication auth =
+                SecurityContextHolder.getContext().getAuthentication();
+
+        return (Usuario) auth.getPrincipal();
     }
 
     @Override

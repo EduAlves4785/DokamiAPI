@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -25,7 +26,7 @@ public class Categoria {
     private String id;
 
     @Column
-    private Integer nome;
+    private String nome;
     @Column
     private int ordem;
     @ManyToOne
@@ -35,6 +36,6 @@ public class Categoria {
     @CreatedDate
     private LocalDateTime data_criacao;
     @Column
-    @CreatedDate
+    @LastModifiedDate
     private LocalDateTime ultima_alteracao;
 }
