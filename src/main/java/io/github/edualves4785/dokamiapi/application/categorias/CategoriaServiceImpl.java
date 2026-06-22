@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -26,11 +27,25 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     @Override
     public List<Categoria> findAll() {
-        return  repository.findAll();
+        return repository.findAll();
     }
 
     @Override
     public void deleteById(String id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Categoria atualizar(CategoriaDTO dto, String id) {
+        Categoria categoria = repository.findById(id)
+                .orElseThrow();
+
+        categoria.setNome(dto.getNome());
+        categoria.setOrdem(dto.getOrdem());
+        LocalDateTime now = LocalDateTime.now();
+        categoria.setUltima_alteracao(now);
+
+        return categoria;
     }
 }

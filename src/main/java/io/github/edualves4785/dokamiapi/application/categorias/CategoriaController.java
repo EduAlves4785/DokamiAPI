@@ -58,4 +58,16 @@ public class CategoriaController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<CategoriaResponseDTO> atualizar(
+            @PathVariable String id,
+            @RequestBody CategoriaDTO dto) {
+
+        Categoria categoria = service.atualizar(dto, id);
+
+        var result=categoriaMapper.categoriaToDTO(categoria);
+
+        return ResponseEntity.ok(result);
+    }
+
 }
