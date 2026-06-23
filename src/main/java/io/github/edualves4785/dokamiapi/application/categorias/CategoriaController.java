@@ -1,11 +1,8 @@
 package io.github.edualves4785.dokamiapi.application.categorias;
 
-import io.github.edualves4785.dokamiapi.application.usuarios.UsuarioDTO;
 import io.github.edualves4785.dokamiapi.domain.entities.Categoria;
-import io.github.edualves4785.dokamiapi.domain.entities.Usuario;
-import io.github.edualves4785.dokamiapi.domain.entities.exception.TuplaDuplicadaExcpetion;
-import io.github.edualves4785.dokamiapi.domain.entities.service.CategoriaService;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.service.CategoriaService;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @RestController

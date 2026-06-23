@@ -1,14 +1,15 @@
 package io.github.edualves4785.dokamiapi.application.pastas;
 
-import io.github.edualves4785.dokamiapi.domain.entities.Categoria;
 import io.github.edualves4785.dokamiapi.domain.entities.Pasta;
-import io.github.edualves4785.dokamiapi.domain.entities.service.PastaService;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.service.PastaService;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import io.github.edualves4785.dokamiapi.infra.repository.CategoriaRepository;
 import io.github.edualves4785.dokamiapi.infra.repository.PastaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -36,5 +37,19 @@ public class PastaServiceImpl implements PastaService {
     @Override
     public void deleteById(String id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public Pasta atualizar(PastaDTO dto, String id) {
+        Pasta pasta = repository.findById(id)
+                .orElseThrow();
+
+        pasta.setNome(dto.getNome());
+        pasta.setOrdem(dto.getOrdem());
+        LocalDateTime now = LocalDateTime.now();
+        pasta.setUltima_alteracao(now);
+
+        return pasta;
     }
 }

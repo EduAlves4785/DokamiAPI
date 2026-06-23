@@ -1,9 +1,7 @@
 package io.github.edualves4785.dokamiapi.application.pastas;
 
-import io.github.edualves4785.dokamiapi.application.categorias.CategoriaDTO;
-import io.github.edualves4785.dokamiapi.application.categorias.CategoriaResponseDTO;
-import io.github.edualves4785.dokamiapi.domain.entities.Categoria;
-import io.github.edualves4785.dokamiapi.domain.entities.service.PastaService;
+import io.github.edualves4785.dokamiapi.domain.entities.Pasta;
+import io.github.edualves4785.dokamiapi.domain.service.PastaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -51,5 +49,17 @@ public class PastaController {
             @PathVariable String id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PastaResponseDTO> atualizar(
+            @PathVariable String id,
+            @RequestBody PastaDTO dto) {
+
+        Pasta pasta = service.atualizar(dto, id);
+
+        var result=mapper.pastaToDTO(pasta);
+
+        return ResponseEntity.ok(result);
     }
 }

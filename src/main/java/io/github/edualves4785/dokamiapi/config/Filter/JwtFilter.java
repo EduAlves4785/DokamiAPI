@@ -3,7 +3,7 @@ package io.github.edualves4785.dokamiapi.config.Filter;
 import io.github.edualves4785.dokamiapi.jwt.InvalidTokenExcpetion;
 import io.github.edualves4785.dokamiapi.jwt.JwtService;
 import io.github.edualves4785.dokamiapi.domain.entities.Usuario;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;

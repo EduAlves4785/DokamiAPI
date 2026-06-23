@@ -3,8 +3,8 @@ package io.github.edualves4785.dokamiapi.application.usuarios;
 import io.github.edualves4785.dokamiapi.jwt.JwtService;
 import io.github.edualves4785.dokamiapi.domain.entities.AccessToken;
 import io.github.edualves4785.dokamiapi.domain.entities.Usuario;
-import io.github.edualves4785.dokamiapi.domain.entities.exception.TuplaDuplicadaExcpetion;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.exception.TuplaDuplicadaExcpetion;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import io.github.edualves4785.dokamiapi.infra.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -12,8 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Security;
 
 @Service
 @RequiredArgsConstructor

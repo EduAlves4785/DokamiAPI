@@ -1,7 +1,7 @@
 package io.github.edualves4785.dokamiapi.config;
 
 import io.github.edualves4785.dokamiapi.config.Filter.JwtFilter;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import io.github.edualves4785.dokamiapi.jwt.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +40,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/v1/usuarios/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/v1/categorias/**").permitAll();
                     auth.requestMatchers(HttpMethod.GET, "/v1/pastas/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/v1/conteudos/**").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

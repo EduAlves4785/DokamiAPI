@@ -1,8 +1,8 @@
 package io.github.edualves4785.dokamiapi.application.usuarios;
 
 import io.github.edualves4785.dokamiapi.domain.entities.Usuario;
-import io.github.edualves4785.dokamiapi.domain.entities.exception.TuplaDuplicadaExcpetion;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.exception.TuplaDuplicadaExcpetion;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

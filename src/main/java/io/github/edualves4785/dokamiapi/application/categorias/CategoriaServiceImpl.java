@@ -1,8 +1,8 @@
 package io.github.edualves4785.dokamiapi.application.categorias;
 
 import io.github.edualves4785.dokamiapi.domain.entities.Categoria;
-import io.github.edualves4785.dokamiapi.domain.entities.service.CategoriaService;
-import io.github.edualves4785.dokamiapi.domain.entities.service.UsuarioService;
+import io.github.edualves4785.dokamiapi.domain.service.CategoriaService;
+import io.github.edualves4785.dokamiapi.domain.service.UsuarioService;
 import io.github.edualves4785.dokamiapi.infra.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

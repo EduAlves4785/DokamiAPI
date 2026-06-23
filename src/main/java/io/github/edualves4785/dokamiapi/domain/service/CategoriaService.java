@@ -1,4 +1,4 @@
-package io.github.edualves4785.dokamiapi.domain.entities.service;
+package io.github.edualves4785.dokamiapi.domain.service;
 
 import io.github.edualves4785.dokamiapi.application.categorias.CategoriaDTO;
 import io.github.edualves4785.dokamiapi.domain.entities.Categoria;
